@@ -4,41 +4,10 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using MvvmCross.Commands;
 using System;
+using SectionListMvvmCross.Models;
 
 namespace SectionListMvvmCross
 {
-    public class SectionItem
-    {
-        public SectionItem(string headerText, IList<Book> collection)
-        {
-            HeaderText = headerText;
-            Collection = collection;
-        }
-
-        public string HeaderText { get; set; }
-
-        public IList<Book> Collection { get; set; }
-    }
-
-
-    public class Book
-    {
-        public Book(string name, string author)
-        {
-            Author = author;
-            Name = name;
-        }
-
-        public string Author { get; set; }
-
-        public string Name { get; set; }
-
-        public override string ToString()
-        {
-            return $"{Name} by {Author}";
-        }
-    }
-
     public class SampleViewModel : MvxViewModel
     {
         public SampleViewModel()

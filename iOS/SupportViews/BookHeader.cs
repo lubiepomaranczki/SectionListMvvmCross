@@ -6,6 +6,7 @@ namespace SectionListMvvmCross.iOS.SupportViews
     public class BookHeader : UICollectionReusableView
     {
         public static readonly NSString Key = new NSString("BookHeader");
+
         private UILabel headerText;
 
         public string HeaderText

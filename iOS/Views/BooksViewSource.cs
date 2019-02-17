@@ -5,6 +5,7 @@ using SectionListMvvmCross.iOS.SupportViews;
 using Foundation;
 using System.Collections.Generic;
 using SectionListMvvmCross.Extensions;
+using SectionListMvvmCross.Models;
 
 namespace SectionListMvvmCross.iOS.Views
 {
@@ -57,7 +58,10 @@ namespace SectionListMvvmCross.iOS.Views
         public override UICollectionReusableView GetViewForSupplementaryElement(UICollectionView collectionView, NSString elementKind, NSIndexPath indexPath)
         {
             var headerView = (BookHeader)collectionView.DequeueReusableSupplementaryView(elementKind, BookHeader.Key, indexPath);
+
+            //TODO do whatever header initialization you need.
             headerView.HeaderText = SectionedItemsCollection[indexPath.Section].HeaderText;
+
             return headerView;
         }
 

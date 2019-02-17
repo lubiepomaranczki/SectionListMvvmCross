@@ -1,7 +1,6 @@
 ﻿using UIKit;
 using SectionListMvvmCross.iOS.SupportViews;
 using CoreGraphics;
-using System.Drawing;
 
 namespace SectionListMvvmCross.iOS.Views
 {

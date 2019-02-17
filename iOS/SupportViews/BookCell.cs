@@ -2,6 +2,7 @@
 using Foundation;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Ios.Binding.Views;
+using SectionListMvvmCross.Models;
 using UIKit;
 
 namespace SectionListMvvmCross.iOS.SupportViews
