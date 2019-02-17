@@ -3,13 +3,16 @@ using MvvmCross.Platforms.Ios.Binding.Views;
 using UIKit;
 using SectionListMvvmCross.iOS.SupportViews;
 using Foundation;
-using System.Collections;
+using System.Collections.Generic;
+using SectionListMvvmCross.Extensions;
 
 namespace SectionListMvvmCross.iOS.Views
 {
     public class BooksViewSource : MvxCollectionViewSource
     {
         private readonly UICollectionView _collectionView;
+
+        public IList<SectionItem> SectionedItemsCollection { get; set; }
 
         public BooksViewSource(UICollectionView collectionView)
             : base(collectionView, BookCell.Key)
@@ -22,48 +25,52 @@ namespace SectionListMvvmCross.iOS.Views
 
         public override nint NumberOfSections(UICollectionView collectionView)
         {
-            return 2;
-            //if (Headers == null || !Headers.Any())
-            //{
-            //    return 1;
-            //}
+            if (SectionedItemsCollection.IsNullOrEmpty())
+            {
+                return 1;
+            }
 
-            //return Headers.Count;
+            return SectionedItemsCollection.Count;
         }
 
         public override nint GetItemsCount(UICollectionView collectionView, nint section)
         {
-            return 2;
-            //if (Headers == null || !Headers.Any())
-            //{
-            //    return 0;
-            //}
+            if (SectionedItemsCollection.IsNullOrEmpty() || SectionedItemsCollection.Count - 1 < (int)section)
+            {
+                throw new Exception(nameof(GetItemsCount));
+            }
 
-            //return Headers[(int)section].ItemCount;
+            var collection = SectionedItemsCollection[(int)section].Collection;
+            if (collection.IsNullOrEmpty())
+            {
+                throw new Exception("Collection can't be null or empty!");
+            }
+
+            return collection.Count;
         }
 
-        //protected override object GetItemAt(NSIndexPath indexPath)
-        //{
-        //    return Headers[indexPath.Section].Players[indexPath.Row];
-        //}
+        protected override object GetItemAt(NSIndexPath indexPath)
+        {
+            return SectionedItemsCollection[indexPath.Section].Collection[indexPath.Row];
+        }
 
         public override UICollectionReusableView GetViewForSupplementaryElement(UICollectionView collectionView, NSString elementKind, NSIndexPath indexPath)
         {
             var headerView = (BookHeader)collectionView.DequeueReusableSupplementaryView(elementKind, BookHeader.Key, indexPath);
-            headerView.HeaderText = "Test";
+            headerView.HeaderText = SectionedItemsCollection[indexPath.Section].HeaderText;
             return headerView;
-        }
-
-        public override void ReloadData()
-        {
-            CollectionView.Layer.RemoveAllAnimations();
-            base.ReloadData();
         }
 
         protected override UICollectionViewCell GetOrCreateCellFor(UICollectionView collectionView,
             NSIndexPath indexPath, object item)
         {
             return (UICollectionViewCell)CollectionView.DequeueReusableCell(BookCell.Key, indexPath);
+        }
+
+        public override void ReloadData()
+        {
+            CollectionView.Layer.RemoveAllAnimations();
+            base.ReloadData();
         }
     }
 }

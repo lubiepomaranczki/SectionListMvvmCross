@@ -21,33 +21,45 @@ namespace SectionListMvvmCross.iOS.SupportViews
 
         private void InitializeUi()
         {
+            var viewHolder = new UIView
+            {
+                TranslatesAutoresizingMaskIntoConstraints = false,
+                BackgroundColor = UIColor.FromRGB(245, 241, 230)
+            };
+            Add(viewHolder);
+            viewHolder.LeftAnchor.ConstraintEqualTo(LeftAnchor, 8).Active = true;
+            viewHolder.TopAnchor.ConstraintEqualTo(TopAnchor).Active = true;
+            viewHolder.RightAnchor.ConstraintEqualTo(RightAnchor, -8).Active = true;
+            viewHolder.BottomAnchor.ConstraintEqualTo(BottomAnchor).Active = true;
+            viewHolder.Layer.CornerRadius = 8;
+
             bookName = new UILabel
             {
                 TranslatesAutoresizingMaskIntoConstraints = false
             };
-            Add(bookName);
+            viewHolder.Add(bookName);
 
-            bookName.LeftAnchor.ConstraintEqualTo(LeftAnchor, 8).Active = true;
-            bookName.TopAnchor.ConstraintEqualTo(TopAnchor, 8).Active = true;
-            bookName.RightAnchor.ConstraintEqualTo(RightAnchor, 8).Active = true;
+            bookName.LeftAnchor.ConstraintEqualTo(viewHolder.LeftAnchor, 8).Active = true;
+            bookName.TopAnchor.ConstraintEqualTo(viewHolder.TopAnchor, 8).Active = true;
+            bookName.RightAnchor.ConstraintEqualTo(viewHolder.RightAnchor, -8).Active = true;
 
             bookAuthor = new UILabel
             {
                 TranslatesAutoresizingMaskIntoConstraints = false
             };
-            Add(bookAuthor);
+            viewHolder.Add(bookAuthor);
 
-            bookAuthor.LeftAnchor.ConstraintEqualTo(LeftAnchor, 8).Active = true;
+            bookAuthor.LeftAnchor.ConstraintEqualTo(viewHolder.LeftAnchor, 8).Active = true;
             bookAuthor.TopAnchor.ConstraintEqualTo(bookName.BottomAnchor, 8).Active = true;
-            bookAuthor.RightAnchor.ConstraintEqualTo(RightAnchor, 8).Active = true;
-            bookAuthor.BottomAnchor.ConstraintEqualTo(BottomAnchor, -8).Active = true;
+            bookAuthor.RightAnchor.ConstraintEqualTo(viewHolder.RightAnchor, -8).Active = true;
+            bookAuthor.BottomAnchor.ConstraintEqualTo(viewHolder.BottomAnchor, -8).Active = true;
         }
 
         private void InitializeBindings()
         {
             this.DelayBind(() =>
             {
-                var set = (this).CreateBindingSet<BookCell, BookItem>();
+                var set = (this).CreateBindingSet<BookCell, Book>();
                 set.Bind(bookName).To(vm => vm.Name);
                 set.Bind(bookAuthor).To(vm => vm.Author);
                 set.Apply();

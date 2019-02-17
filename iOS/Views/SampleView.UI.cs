@@ -12,7 +12,7 @@ namespace SectionListMvvmCross.iOS.Views
         private void InitializeUI()
         {
             EdgesForExtendedLayout = UIRectEdge.None;
-            View.BackgroundColor = UIColor.White;
+            View.BackgroundColor = UIColor.FromRGB(40, 40, 40);
 
             var container = new UIView
             {
@@ -28,7 +28,7 @@ namespace SectionListMvvmCross.iOS.Views
             {
                 TranslatesAutoresizingMaskIntoConstraints = false,
                 Text = "This is a sample View with UICollectionView",
-                TextColor = UIColor.Black
+                TextColor = UIColor.FromRGB(245, 241, 230)
             };
 
             container.Add(infoLabel);
@@ -38,17 +38,18 @@ namespace SectionListMvvmCross.iOS.Views
 
             var flowLayout = new UICollectionViewFlowLayout
             {
-                ItemSize = new CGSize(220, 80),
+                ItemSize = new CGSize(View.Frame.Width, 100),
                 ScrollDirection = UICollectionViewScrollDirection.Vertical,
-                MinimumInteritemSpacing = 10,
-                MinimumLineSpacing = 10,
-                HeaderReferenceSize = new SizeF(200, 35)
+                MinimumInteritemSpacing = 4,
+                MinimumLineSpacing = 4,
+                HeaderReferenceSize = new CGSize(View.Frame.Width, 50),
+                SectionInset = new UIEdgeInsets(4, 0, 4, 0)
             };
 
             booksCollectionView = new SampleCollectionView(flowLayout)
             {
                 TranslatesAutoresizingMaskIntoConstraints = false,
-                BackgroundColor = UIColor.Yellow
+                BackgroundColor = UIColor.Clear
             };
 
             container.Add(booksCollectionView);

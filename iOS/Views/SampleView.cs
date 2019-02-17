@@ -20,7 +20,8 @@ namespace SectionListMvvmCross.iOS.Views
             booksCollectionView.Source = booksCollectionViewSource = new BooksViewSource(booksCollectionView);
 
             var set = this.CreateBindingSet<SampleView, SampleViewModel>();
-            set.Bind(booksCollectionViewSource).For(v => v.ItemsSource).To(vm => vm.SectionedList);
+            set.Bind(booksCollectionViewSource).For(v => v.SectionedItemsCollection).To(vm => vm.SectionedList);
+            set.Bind(booksCollectionViewSource).For(v => v.SelectionChangedCommand).To(vm => vm.ItemSelectedCmd);
             set.Apply();
         }
     }

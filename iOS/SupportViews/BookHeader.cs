@@ -22,17 +22,19 @@ namespace SectionListMvvmCross.iOS.SupportViews
         public BookHeader(System.Drawing.RectangleF frame)
             : base(frame)
         {
+            BackgroundColor = UIColor.FromRGBA(170, 170, 170, 170);
+
             headerText = new UILabel
             {
                 TranslatesAutoresizingMaskIntoConstraints = false,
-                TextColor = UIColor.Black
+                TextColor = UIColor.FromRGB(245, 241, 230),
+                TextAlignment = UITextAlignment.Center
             };
             AddSubview(headerText);
 
             headerText.LeftAnchor.ConstraintEqualTo(LeftAnchor).Active = true;
-            headerText.TopAnchor.ConstraintEqualTo(TopAnchor, 10).Active = true;
             headerText.RightAnchor.ConstraintEqualTo(RightAnchor).Active = true;
-            headerText.TopAnchor.ConstraintEqualTo(BottomAnchor, -10).Active = true;
+            headerText.CenterYAnchor.ConstraintEqualTo(CenterYAnchor).Active = true;
         }
     }
 }
