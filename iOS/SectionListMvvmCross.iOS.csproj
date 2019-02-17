@@ -99,6 +99,7 @@
   <ItemGroup>
     <Folder Include="Resources\" />
     <Folder Include="Views\" />
+    <Folder Include="SupportViews\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
@@ -118,6 +119,11 @@
     </Compile>
     <Compile Include="Views\SampleView.cs" />
     <Compile Include="Views\SampleView.UI.cs" />
+    <Compile Include="SupportViews\SampleCollectionView.cs" />
+    <Compile Include="SupportViews\SampleFlowLayout.cs" />
+    <Compile Include="Views\BooksViewSource.cs" />
+    <Compile Include="SupportViews\BookCell.cs" />
+    <Compile Include="SupportViews\BookHeader.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

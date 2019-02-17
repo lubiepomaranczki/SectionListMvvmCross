@@ -1,9 +1,14 @@
 ﻿using UIKit;
+using SectionListMvvmCross.iOS.SupportViews;
+using CoreGraphics;
+using System.Drawing;
 
 namespace SectionListMvvmCross.iOS.Views
 {
     public partial class SampleView
     {
+        private SampleCollectionView booksCollectionView;
+
         private void InitializeUI()
         {
             EdgesForExtendedLayout = UIRectEdge.None;
@@ -11,8 +16,7 @@ namespace SectionListMvvmCross.iOS.Views
 
             var container = new UIView
             {
-                TranslatesAutoresizingMaskIntoConstraints = false,
-                BackgroundColor = UIColor.Cyan
+                TranslatesAutoresizingMaskIntoConstraints = false
             };
             Add(container);
             container.LeftAnchor.ConstraintEqualTo(View.LeftAnchor).Active = true;
@@ -31,6 +35,27 @@ namespace SectionListMvvmCross.iOS.Views
             infoLabel.CenterXAnchor.ConstraintEqualTo(View.CenterXAnchor).Active = true;
             infoLabel.TopAnchor.ConstraintEqualTo(View.TopAnchor, 16).Active = true;
             infoLabel.HeightAnchor.ConstraintEqualTo(50).Active = true;
+
+            var flowLayout = new UICollectionViewFlowLayout
+            {
+                ItemSize = new CGSize(220, 80),
+                ScrollDirection = UICollectionViewScrollDirection.Vertical,
+                MinimumInteritemSpacing = 10,
+                MinimumLineSpacing = 10,
+                HeaderReferenceSize = new SizeF(200, 35)
+            };
+
+            booksCollectionView = new SampleCollectionView(flowLayout)
+            {
+                TranslatesAutoresizingMaskIntoConstraints = false,
+                BackgroundColor = UIColor.Yellow
+            };
+
+            container.Add(booksCollectionView);
+            booksCollectionView.LeftAnchor.ConstraintEqualTo(View.LeftAnchor, 8).Active = true;
+            booksCollectionView.TopAnchor.ConstraintEqualTo(infoLabel.BottomAnchor, 8).Active = true;
+            booksCollectionView.RightAnchor.ConstraintEqualTo(View.RightAnchor, -8).Active = true;
+            booksCollectionView.BottomAnchor.ConstraintEqualTo(View.BottomAnchor).Active = true;
         }
     }
 }
